@@ -1,4 +1,4 @@
-package com.ryanluedders.aoc;
+package com.ryanluedders.aoc.dayone;
 
 import static org.junit.Assert.assertTrue;
 

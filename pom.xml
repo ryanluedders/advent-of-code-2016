@@ -25,7 +25,7 @@
                         <manifest>
                             <addClasspath>true</addClasspath>
                             <classpathPrefix>lib/</classpathPrefix>
-                            <mainClass>com.ryanluedders.aoc.DayOne</mainClass>
+                            <mainClass>com.ryanluedders.aoc.dayone.DayOne</mainClass>
                         </manifest>
                     </archive>
                 </configuration>
