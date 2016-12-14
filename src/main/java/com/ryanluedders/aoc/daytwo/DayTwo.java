@@ -24,10 +24,10 @@ public class DayTwo {
             for (String m : d) {
                 moveOnKeypad(m, kp);
             }
-            System.out.println(
-                "[" + Integer.toString(kp.getLocation().x) + ","
-                + Integer.toString(kp.getLocation().y) + "]");
+            System.out.print(getKeyAtCoordinate(kp.getLocation().x, kp.getLocation().y));
         }
+        
+        System.out.println("");
     }
     
     static void moveOnKeypad(String direction, KeyPad kp) {
@@ -45,6 +45,43 @@ public class DayTwo {
                 kp.move(Direction.RIGHT);
                 break;
         }
+    }
+    
+    static String getKeyAtCoordinate(int x, int y) {
+        if (x == 0) {
+            if (y == 0) {
+                return "7";
+            }
+            if (y == 1) {
+                return "4";
+            }
+            if (y == 2) {
+                return "1";
+            }
+        }
+        if (x == 1) {
+            if (y == 0) {
+                return "8";
+            }
+            if (y == 1) {
+                return "5";
+            }
+            if (y == 2) {
+                return "2";
+            }
+        }
+        if (x == 2) {
+            if (y == 0) {
+                return "9";
+            }
+            if (y == 1) {
+                return "6";
+            }
+            if (y == 2) {
+                return "3";
+            }
+        }
+        throw new IllegalArgumentException("unsupported coordinate");
     }
     
     private static List<List<String>> parseStdIn() throws IOException {
