@@ -3,6 +3,7 @@ package com.ryanluedders.aoc.dayone;
 import java.io.IOException;
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -20,6 +21,15 @@ public class DayOne {
         public Coords(Coords coords) {
             this.x = coords.x;
             this.y = coords.y;
+        }
+        
+        @Override
+        public boolean equals(Object o) {
+            if (o instanceof Coords) {
+                Coords c = (Coords) o;
+                return (c.x == x && c.y == y);
+            }
+            return false;
         }
     };
     
@@ -54,17 +64,40 @@ public class DayOne {
         position.coords.x = 0;
         position.coords.y = 0;
         
+        List<Coords> trackLog = new ArrayList<Coords>();
+        Coords destination = null;
+        
         for (String s : input) {
-            String turnDirection = s.substring(0, 1);
-            int distance = Integer.parseInt(s.substring(1));
-            
-            position = makeMove(position, turnDirection, distance);
-            
-            System.out.println("turning=" + turnDirection + ", moving distance=" + 
-                Integer.toString(distance) + " position=" + position.toString());
+            if (destination == null) {
+                String turnDirection = s.substring(0, 1);
+                int distance = Integer.parseInt(s.substring(1));
+                
+                position.direction = nextDirection(position.direction, turnDirection);
+                
+                for (int i = 0; i < distance; i++) {
+                    position.coords = moveDistanceInDirection(
+                        position.coords,
+                        position.direction,
+                        1
+                        );
+                        
+                    if (!trackLog.contains(position.coords)) {
+                        trackLog.add(position.coords);
+                    } else {
+                        destination = position.coords;
+                    }
+                }
+    
+                System.out.println("turning=" + turnDirection + ", moving distance=" + 
+                    Integer.toString(distance) + " position=" + position.toString());
+            }
         }
         
-        int blocksAway = Math.abs(position.coords.x) + Math.abs(position.coords.y);
+        if (destination == null) {
+            destination = position.coords;
+        }
+        
+        int blocksAway = Math.abs(destination.x) + Math.abs(destination.y);
         System.out.println("blocksAway=" + Integer.toString(blocksAway));
     }
     
