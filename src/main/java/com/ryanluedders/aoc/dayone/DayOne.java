@@ -42,7 +42,7 @@ public class DayOne {
         }
         
         public String toString() {
-            return (String.format("[x=%i, y=%i, facing=%i]", coords.x, coords.y, direction));
+            return (String.format("[x=%d, y=%d, facing=%d]", coords.x, coords.y, direction));
         }
     };
     
@@ -63,6 +63,9 @@ public class DayOne {
             System.out.println("turning=" + turnDirection + ", moving distance=" + 
                 Integer.toString(distance) + " position=" + position.toString());
         }
+        
+        int blocksAway = Math.abs(position.coords.x) + Math.abs(position.coords.y);
+        System.out.println("blocksAway=" + Integer.toString(blocksAway));
     }
     
     private static List<String> parseStdIn(String seperator) throws IOException {
