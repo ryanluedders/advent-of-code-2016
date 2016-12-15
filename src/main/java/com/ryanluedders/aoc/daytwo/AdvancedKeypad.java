@@ -3,8 +3,6 @@ package com.ryanluedders.aoc.daytwo;
 
 public class AdvancedKeypad {
     
-    private static final String nStr = null;
-    
     static enum Direction {
         UP,
         DOWN,
@@ -18,13 +16,13 @@ public class AdvancedKeypad {
     }
     
     static final String[][] labels = new String[][] {
-        { nStr, nStr, nStr, nStr, nStr, nStr, nStr},
-        { nStr, nStr, nStr, "D",  nStr, nStr, nStr},
-        { nStr, nStr, "A",  "B",  "C",  nStr, nStr},
-        { nStr, "5",  "6",  "7",  "8",  "9",  nStr},
-        { nStr, nStr, "2",  "3",  "4",  nStr, nStr},
-        { nStr, nStr, nStr, "1",  nStr, nStr, nStr},
-        { nStr, nStr, nStr, nStr, nStr, nStr, nStr},
+        { null, null, null, null, null, null, null},
+        { null, null, null, "D",  null, null, null},
+        { null, null, "A",  "B",  "C",  null, null},
+        { null, "5",  "6",  "7",  "8",  "9",  null},
+        { null, null, "2",  "3",  "4",  null, null},
+        { null, null, null, "1",  null, null, null},
+        { null, null, null, null, null, null, null},
     };
     
     private Coord location = null;
@@ -42,22 +40,22 @@ public class AdvancedKeypad {
     public void move(Direction direction) {
         switch (direction) {
             case DOWN:
-                if (labels[location.y - 1][location.x] != nStr) {
+                if (labels[location.y - 1][location.x] != null) {
                     location.y = location.y - 1;
                 }
                 break;
             case UP:
-                if (labels[location.y + 1][location.x] != nStr) {
+                if (labels[location.y + 1][location.x] != null) {
                     location.y = location.y + 1;
                 }
                 break;
             case LEFT:
-                if (labels[location.y][location.x - 1] != nStr) {
+                if (labels[location.y][location.x - 1] != null) {
                     location.x = location.x - 1;
                 }
                 break;
             case RIGHT:
-                if (labels[location.y][location.x + 1] != nStr) {
+                if (labels[location.y][location.x + 1] != null) {
                     location.x = location.x + 1;
                 }
                 break;
