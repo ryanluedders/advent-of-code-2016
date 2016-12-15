@@ -6,31 +6,26 @@ import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.ryanluedders.aoc.daytwo.KeyPad.Coord;
-import com.ryanluedders.aoc.daytwo.KeyPad.Direction;
+import com.ryanluedders.aoc.daytwo.AdvancedKeypad.Direction;
 
 public class DayTwo {
 
     public static void main(String[] argvs) throws IOException {
         List<List<String>> input = parseStdIn();
         
-        KeyPad kp = new KeyPad(3,3);
-        Coord location = new Coord();
-        location.x = 1;
-        location.y = 1;
-        kp.setLocation(location);
+        AdvancedKeypad kp = new AdvancedKeypad();
         
         for (List<String> d : input) {
             for (String m : d) {
                 moveOnKeypad(m, kp);
             }
-            System.out.print(getKeyAtCoordinate(kp.getLocation().x, kp.getLocation().y));
+            System.out.print(AdvancedKeypad.getLabel(kp.getLocation().x, kp.getLocation().y));
         }
         
         System.out.println("");
     }
     
-    static void moveOnKeypad(String direction, KeyPad kp) {
+    static void moveOnKeypad(String direction, AdvancedKeypad kp) {
         switch (direction) {
             case "U":
                 kp.move(Direction.UP);
@@ -45,43 +40,6 @@ public class DayTwo {
                 kp.move(Direction.RIGHT);
                 break;
         }
-    }
-    
-    static String getKeyAtCoordinate(int x, int y) {
-        if (x == 0) {
-            if (y == 0) {
-                return "7";
-            }
-            if (y == 1) {
-                return "4";
-            }
-            if (y == 2) {
-                return "1";
-            }
-        }
-        if (x == 1) {
-            if (y == 0) {
-                return "8";
-            }
-            if (y == 1) {
-                return "5";
-            }
-            if (y == 2) {
-                return "2";
-            }
-        }
-        if (x == 2) {
-            if (y == 0) {
-                return "9";
-            }
-            if (y == 1) {
-                return "6";
-            }
-            if (y == 2) {
-                return "3";
-            }
-        }
-        throw new IllegalArgumentException("unsupported coordinate");
     }
     
     private static List<List<String>> parseStdIn() throws IOException {
