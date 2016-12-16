@@ -4,13 +4,17 @@ import static org.junit.Assert.assertEquals;
 
 import org.junit.Test;
 
-import com.ryanluedders.aoc.daytwo.AdvancedKeypad.Direction;
+import com.ryanluedders.aoc.daytwo.Keypad.Coord;
+import com.ryanluedders.aoc.daytwo.Keypad.Direction;
 
-public class AdvancedKeypadTest {
+public class KeypadTest {
     
     @Test
     public void testMove_happy_path() {
-        AdvancedKeypad k = new AdvancedKeypad();
+        Coord starting = new Coord();
+        starting.x = 1;
+        starting.y = 3;
+        Keypad k = new Keypad(DayTwo.part2, starting);
         
         assertEquals(1, k.getLocation().x);
         assertEquals(3, k.getLocation().y);
@@ -36,9 +40,23 @@ public class AdvancedKeypadTest {
     
     @Test
     public void testGetLabel_happy_path() {
-        assertEquals("5", AdvancedKeypad.getLabel(1,3));
-        assertEquals("6", AdvancedKeypad.getLabel(2,3));
-        assertEquals("D", AdvancedKeypad.getLabel(3,1));
+        Coord starting = new Coord();
+        starting.x = 1;
+        starting.y = 3;
+        Keypad k = new Keypad(DayTwo.part2, starting);
+        
+        Coord loc = new Coord();
+        loc.x = 1;
+        loc.y = 3;
+        assertEquals("5", k.getLabel(loc));
+        
+        loc.x = 2;
+        loc.y = 3;
+        assertEquals("6", k.getLabel(loc));
+        
+        loc.x = 3;
+        loc.y = 1;
+        assertEquals("D", k.getLabel(loc));
     }
     
 }

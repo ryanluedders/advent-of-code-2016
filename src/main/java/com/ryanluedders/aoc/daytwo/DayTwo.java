@@ -6,62 +6,73 @@ import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.ryanluedders.aoc.daytwo.Keypad.Coord;
+
 public class DayTwo {
+    
+    static final String[][] part1 = new String[][] {
+        { null, null, null, null, null},
+        { null, "7",  "8",  "9",  null},
+        { null, "4",  "5",  "6",  null},
+        { null, "1",  "2",  "3",  null},
+        { null, null, null, null, null},
+    };
+    
+    static final String[][] part2 = new String[][] {
+        { null, null, null, null, null, null, null},
+        { null, null, null, "D",  null, null, null},
+        { null, null, "A",  "B",  "C",  null, null},
+        { null, "5",  "6",  "7",  "8",  "9",  null},
+        { null, null, "2",  "3",  "4",  null, null},
+        { null, null, null, "1",  null, null, null},
+        { null, null, null, null, null, null, null},
+    };
 
     public static void main(String[] argvs) throws IOException {
         List<List<String>> input = parseStdIn();
         
+        Coord part1Starting = new Coord();
+        part1Starting.x = 2;
+        part1Starting.y = 2;
+        
         System.out.print("part1: ");
-        SimpleKeypad skp = new SimpleKeypad();
+        Keypad kp1 = new Keypad(part1, part1Starting);
         for (List<String> d : input) {
             for (String m : d) {
-                moveOnSimpleKeypad(m, skp);
+                moveOnKeypad(m, kp1);
             }
-            System.out.print(SimpleKeypad.getLabel(skp.getLocation().x, skp.getLocation().y));
+            System.out.print(kp1.getLabel(kp1.getLocation()));
         }
         System.out.println("");
         
+        Coord part2Starting = new Coord();
+        part2Starting.x = 1;
+        part2Starting.y = 3;
+        
         System.out.print("part2: ");
-        AdvancedKeypad kp = new AdvancedKeypad();
+        Keypad kp2 = new Keypad(part2, part2Starting);
         for (List<String> d : input) {
             for (String m : d) {
-                moveOnKeypad(m, kp);
+                moveOnKeypad(m, kp2);
             }
-            System.out.print(AdvancedKeypad.getLabel(kp.getLocation().x, kp.getLocation().y));
+            System.out.print(kp2.getLabel(kp2.getLocation()));
         }
         System.out.println("");
     }
     
-    static void moveOnSimpleKeypad(String direction, SimpleKeypad kp) {
+    static void moveOnKeypad(String direction, Keypad kp) {
         switch (direction) {
             case "U":
-                kp.move(SimpleKeypad.Direction.UP);
+                kp.move(Keypad.Direction.UP);
                 break;
             case "D":
-                kp.move(SimpleKeypad.Direction.DOWN);
+                kp.move(Keypad.Direction.DOWN);
                 break;
             case "L":
-                kp.move(SimpleKeypad.Direction.LEFT);
+                kp.move(Keypad.Direction.LEFT);
                 break;
             case "R":
-                kp.move(SimpleKeypad.Direction.RIGHT);
-                break;
-        }
-    }
-    
-    static void moveOnKeypad(String direction, AdvancedKeypad kp) {
-        switch (direction) {
-            case "U":
-                kp.move(AdvancedKeypad.Direction.UP);
-                break;
-            case "D":
-                kp.move(AdvancedKeypad.Direction.DOWN);
-                break;
-            case "L":
-                kp.move(AdvancedKeypad.Direction.LEFT);
-                break;
-            case "R":
-                kp.move(AdvancedKeypad.Direction.RIGHT);
+                kp.move(Keypad.Direction.RIGHT);
                 break;
         }
     }

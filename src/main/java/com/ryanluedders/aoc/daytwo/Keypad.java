@@ -1,6 +1,6 @@
 package com.ryanluedders.aoc.daytwo;
 
-public class SimpleKeypad {
+public class Keypad {
     
     static enum Direction {
         UP,
@@ -14,24 +14,15 @@ public class SimpleKeypad {
         public int y;
     }
     
-    static final String[][] labels = new String[][] {
-        { null, null, null, null, null},
-        { null, "7",  "8",  "9",  null},
-        { null, "4",  "5",  "6",  null},
-        { null, "1",  "2",  "3",  null},
-        { null, null, null, null, null},
-    };
+    private String[][] labels;
     
     private Coord location = null;
     
-    public SimpleKeypad() {
+    public Keypad(String[][] labels, Coord starting) {
         location = new Coord();
-        location.x = 2;
-        location.y = 2;
-    }
-    
-    public void setLocation(Coord location) {
-        this.location = location;
+        location.x = starting.x;
+        location.y = starting.y;
+        this.labels = labels;
     }
     
     public Coord getLocation() {
@@ -63,11 +54,11 @@ public class SimpleKeypad {
         }     
     }
     
-    public static String getLabel(int x, int y) {
-        if (y > labels.length || x > labels[0].length) {
+    public String getLabel(Coord location) {
+        if (location.y > labels.length || location.x > labels[0].length) {
             throw new IllegalArgumentException("invalid coordinate");
         }
-        return labels[y][x];
+        return labels[location.y][location.x];
     }
 
 }
