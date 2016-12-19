@@ -1,4 +1,4 @@
-package com.ryanluedders.aoc.daytwo;
+package com.ryanluedders.aoc.day2;
 
 public class Keypad {
     

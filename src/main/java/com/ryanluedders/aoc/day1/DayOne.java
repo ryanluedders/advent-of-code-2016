@@ -1,4 +1,4 @@
-package com.ryanluedders.aoc.dayone;
+package com.ryanluedders.aoc.day1;
 
 import java.io.IOException;
 import java.io.BufferedReader;

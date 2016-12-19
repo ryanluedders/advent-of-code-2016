@@ -1,11 +1,11 @@
-package com.ryanluedders.aoc.daytwo;
+package com.ryanluedders.aoc.day2;
 
 import static org.junit.Assert.assertEquals;
 
 import org.junit.Test;
 
-import com.ryanluedders.aoc.daytwo.Keypad.Coord;
-import com.ryanluedders.aoc.daytwo.Keypad.Direction;
+import com.ryanluedders.aoc.day2.Keypad.Coord;
+import com.ryanluedders.aoc.day2.Keypad.Direction;
 
 public class KeypadTest {
     

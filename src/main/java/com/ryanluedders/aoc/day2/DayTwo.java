@@ -1,4 +1,4 @@
-package com.ryanluedders.aoc.daytwo;
+package com.ryanluedders.aoc.day2;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -6,7 +6,7 @@ import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.ryanluedders.aoc.daytwo.Keypad.Coord;
+import com.ryanluedders.aoc.day2.Keypad.Coord;
 
 public class DayTwo {
     

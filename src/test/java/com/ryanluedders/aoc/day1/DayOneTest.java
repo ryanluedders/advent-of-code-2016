@@ -1,4 +1,4 @@
-package com.ryanluedders.aoc.dayone;
+package com.ryanluedders.aoc.day1;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
@@ -6,7 +6,7 @@ import static org.junit.Assert.assertTrue;
 
 import org.junit.Test;
 
-import com.ryanluedders.aoc.dayone.DayOne.Position;
+import com.ryanluedders.aoc.day1.DayOne.Position;
 
 public class DayOneTest {
 
