@@ -23,10 +23,10 @@ public class DayFour {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         String line;
         while((line = br.readLine()) != null) {
-            Pattern p = Pattern.compile("^\\s+(\\d+)\\s+(\\d+)\\s+(\\d+)\\s*$");
+            Pattern p = Pattern.compile("^(.*)\\[(.*)\\]$");
             Matcher m = p.matcher(line);
             if (m.matches()) {
-                values.add(Arrays.asList(m.group(1), m.group(2), m.group(3)));
+                values.add(Arrays.asList(m.group(1), m.group(2)));
             }
         }
         
