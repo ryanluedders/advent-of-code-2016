@@ -5,16 +5,36 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Comparator;
+import java.util.Collections;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class DayFour {
+    
+    private static final int IDX_SECTOR_ID = 1;
+    private static final int IDX_ENC_NAME = 0;
+    private static final int IDX_HASH = 2;
 
     public static void main(String[] argvs) throws IOException {
         List<List<String>> inputs = parseStdIn();
-
-        System.out.println(inputs.toString());
+        
+        int sum = 0;
+        
+        for (List<String> l : inputs) {
+            String calculatedHash = convertLetterCountToHash(getLetterCount(l.get(IDX_ENC_NAME)));
+            //System.out.println("id=" + l.get(IDX_SECTOR_ID) + " inputHash=" + l.get(IDX_HASH) 
+            //    + " calculatedHash=" + calculatedHash);
+                
+            if (l.get(IDX_HASH).equals(calculatedHash)) {
+                sum += Integer.valueOf(l.get(IDX_SECTOR_ID));
+            }
+        }
+        
+        System.out.println("sum-of-ids=" + Integer.toString(sum));
     }
     
     private static List<List<String>> parseStdIn() throws IOException {
@@ -23,14 +43,59 @@ public class DayFour {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         String line;
         while((line = br.readLine()) != null) {
-            Pattern p = Pattern.compile("^(.*)\\[(.*)\\]$");
+            Pattern p = Pattern.compile("^(.*)-(\\d+)\\[(.*)\\]$");
             Matcher m = p.matcher(line);
             if (m.matches()) {
-                values.add(Arrays.asList(m.group(1), m.group(2)));
+                List<String> addition = Arrays.asList(
+                    m.group(IDX_ENC_NAME + 1), 
+                    m.group(IDX_SECTOR_ID + 1), 
+                    m.group(IDX_HASH + 1));
+                values.add(addition);
+                
+                System.out.println("parsed line=" + line + " to ["
+                    + addition.toString() + "]");
             }
         }
         
         return values;
+    }
+    
+    static Map<Character, Integer> getLetterCount(String input) {
+        Map<Character, Integer> letterCount = new HashMap<Character, Integer>();
+
+        for (Character c : input.toCharArray()) {
+            if (Character.isLetter(c)) {
+                if (!letterCount.containsKey(c)) {
+                    letterCount.put(c, 1);
+                } else {
+                    letterCount.put(c, letterCount.get(c) + 1);
+                }
+            }   
+        }
+    
+        return letterCount;
+    }
+    
+    static String convertLetterCountToHash(Map<Character, Integer> input) {
+        List<Map.Entry<Character, Integer>> sorted = new ArrayList<>(input.entrySet());
+
+        Collections.sort(sorted, new Comparator<Map.Entry<Character, Integer>>() {
+           public int compare(Map.Entry<Character, Integer> a, Map.Entry<Character, Integer> b) {
+               if (a.getValue() != b.getValue()) {
+                   return Integer.compare(b.getValue(), a.getValue());
+               } else {
+                   return Character.compare(a.getKey(), b.getKey());
+               }
+           } 
+        });
+        
+        String result = "";
+        
+        for (int i = 0; i < 5; i++) {
+            result += sorted.get(i).getKey();
+        }
+        
+        return result;
     }
     
 }
