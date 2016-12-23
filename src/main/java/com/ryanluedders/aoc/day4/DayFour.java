@@ -28,6 +28,10 @@ public class DayFour {
             String calculatedHash = convertLetterCountToHash(getLetterCount(l.get(IDX_ENC_NAME)));
             //System.out.println("id=" + l.get(IDX_SECTOR_ID) + " inputHash=" + l.get(IDX_HASH) 
             //    + " calculatedHash=" + calculatedHash);
+            
+            int offset = Integer.valueOf(l.get(1));
+            System.out.println("sectorId=" + l.get(1)
+                + " decryptedName=" + shiftWord(l.get(0), offset));
                 
             if (l.get(IDX_HASH).equals(calculatedHash)) {
                 sum += Integer.valueOf(l.get(IDX_SECTOR_ID));
@@ -96,6 +100,27 @@ public class DayFour {
         }
         
         return result;
+    }
+    
+    static String shiftWord(String input, int offset) {
+        String result = "";
+        for (int i = 0; i < input.length(); i++) {
+            Character c = input.charAt(i);
+            if (c.equals('-')) {
+                result += ' ';
+            } else {
+                result += shiftLetter(input.charAt(i), offset);
+            }
+        }
+        return result;
+    }
+    
+    static String shiftLetter(Character c, int offset) {
+        int shift = offset % 26;
+        int startingOffsetFromA = c.charValue() - 'a';
+        int newOffsetFromA = (startingOffsetFromA + shift) % 26;
+        char newValue = (char) (newOffsetFromA + (int) 'a');
+        return Character.toString(newValue);
     }
     
 }
