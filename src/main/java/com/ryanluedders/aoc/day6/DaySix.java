@@ -27,13 +27,23 @@ public class DaySix {
         }
         
         public T getMostFrequent() {
+            List<Map.Entry<T, Integer>> sortedEntries = getSortedEntries();
+            return sortedEntries.get(sortedEntries.size() - 1).getKey();
+        }
+        
+        public T getLeastFrequent() {
+            List<Map.Entry<T, Integer>> sortedEntries = getSortedEntries();
+            return sortedEntries.get(0).getKey();
+        }
+        
+        private List<Map.Entry<T, Integer>> getSortedEntries() {
             List<Map.Entry<T, Integer>> sortedEntries = new LinkedList<Map.Entry<T, Integer>>(counts.entrySet());
             Collections.sort(sortedEntries, new Comparator<Map.Entry<T, Integer>>() {
                 public int compare(Map.Entry<T, Integer> o1, Map.Entry<T, Integer> o2) {
                     return (o1.getValue()).compareTo(o2.getValue());
                 }
             });
-            return sortedEntries.get(sortedEntries.size() - 1).getKey();
+            return sortedEntries;
         }
         
         @Override
@@ -62,11 +72,14 @@ public class DaySix {
         System.out.println(occurrences.toString());
         
         String result = "";
+        String secondResult = "";
         for(CountingMap<Character> m : occurrences) {
             result += m.getMostFrequent();
+            secondResult += m.getLeastFrequent();
         }
         
         System.out.println("result=" + result);
+        System.out.println("secondResult=" + secondResult);
     }
  
     private static List<String> parseStdIn() throws IOException {
