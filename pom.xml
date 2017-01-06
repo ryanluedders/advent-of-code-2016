@@ -34,7 +34,7 @@
                         <manifest>
                             <addClasspath>true</addClasspath>
                             <classpathPrefix>lib/</classpathPrefix>
-                            <mainClass>com.ryanluedders.aoc.day6.DaySix</mainClass>
+                            <mainClass>com.ryanluedders.aoc.day7.DaySeven</mainClass>
                         </manifest>
                     </archive>
                 </configuration>
